@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMP Negeri 2 Purwantoro - Mencetak Generasi Cerdas & Berkarakter</title>
+    
+    <!-- Google Fonts: Playfair Display & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ====== GLOBAL STYLES & VARIABLES ====== */
+        :root {
+            --navy: #1A365D;
+            --navy-light: #2A4B7C;
+            --white: #FFFFFF;
+            --gold: #ECC94B;
+            --gold-dark: #D4AF37;
+            --slate: #2D3748;
+            --slate-light: #718096;
+            --bg-light: #F7FAFC;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--slate);
+            background-color: var(--white);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy);
+            line-height: 1.3;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-gold {
+            background-color: var(--gold);
+            color: var(--navy);
+        }
+
+        .btn-gold:hover {
+            background-color: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-outline {
+            border-color: var(--white);
+            color: var(--white);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--navy);
+        }
+
+        .btn-navy {
+            background-color: var(--navy);
+            color: var(--white);
+            margin-bottom: 30px;
+        }
+        
+        .btn-navy:hover {
+            background-color: var(--navy-light);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+
+        .section-title span {
+            color: var(--gold-dark);
+        }
+
+        /* ====== HEADER & NAVIGATION ====== */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo img {
+            height: 50px;
+            width: 50px;
+            background-color: var(--navy);
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .logo-text h2 {
+            font-size: 1.2rem;
+            margin: 0;
+            color: var(--navy);
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            margin: 0;
+            color: var(--slate-light);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links > li {
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--slate);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            display: block;
+        }
+
+        .nav-links > li > a:hover {
+            color: var(--navy);
+        }
+
+        .nav-links > li > a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links > li > a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--white);
+            min-width: 220px;
+            box-shadow: var(--shadow-lg);
+            border-radius: 8px;
+            overflow: hidden;
+            z-index: 1001;
+            margin-top: 10px; 
+            border-top: 3px solid var(--gold);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* PERBAIKAN: Jembatan transparan agar hover tidak putus saat melewati margin 10px */
+        @media (min-width: 769px) {
+            .nav-links > li.dropdown::after {
+                content: '';
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                height: 15px; 
+                z-index: 1000;
+            }
+        }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--bg-light);
+            color: var(--navy);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--navy);
+        }
+
+        /* ====== HERO SECTION ====== */
+        .hero {
+            background: linear-gradient(rgba(26, 54, 93, 0.85), rgba(26, 54, 93, 0.9)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            color: var(--white);
+            text-align: center;
+            padding: 120px 0;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* ====== PROFILE SECTION ====== */
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .profile-img img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-item i {
+            font-size: 1.5rem;
+            color: var(--gold-dark);
+            background: var(--bg-light);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ====== NEWS & AGENDA SECTION ====== */
+        .news-agenda {
+            background-color: var(--bg-light);
+        }
+
+        .news-agenda-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .news-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .news-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            font-size: 0.85rem;
+            color: var(--gold-dark);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .agenda-box {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--navy);
+        }
+
+        .agenda-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .agenda-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .agenda-date {
+            background: var(--navy);
+            color: var(--white);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            min-width: 60px;
+        }
+
+        .agenda-date span {
+            display: block;
+            font-weight: 700;
+        }
+
+        .agenda-date .day {
+            font-size: 1.5rem;
+        }
+
+        .agenda-date .month {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        /* ====== PRESTASI SECTION ====== */
+        .prestasi {
+            background-color: var(--navy);
+            color: var(--white);
+        }
+
+        .prestasi .section-title {
+            color: var(--white);
+        }
+
+        .prestasi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .prestasi-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .prestasi-card i {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .prestasi-card h3 {
+            color: var(--white);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* ====== PPDB SECTION ====== */
+        .ppdb {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .ppdb-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .step {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .step-number {
+            background: var(--gold);
+            color: var(--navy);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 10px auto;
+        }
+
+        /* ====== SUB PAGES STYLES ====== */
+        .subpage {
+            display: none;
+            padding: 60px 0;
+            min-height: 60vh;
+        }
+        
+        .subpage.active {
+            display: block;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--navy);
+            border-bottom: 4px solid var(--gold);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .content-block {
+            background: var(--bg-light);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--navy);
+        }
+
+        .content-block p {
+            margin-bottom: 15px;
+            color: var(--slate);
+        }
+
+        /* Visi Misi Style */
+        .visi-misi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 30px;
+        }
+        .visi-box, .misi-box {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        .visi-box h3, .misi-box h3 {
+            color: var(--navy);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .misi-box ol {
+            padding-left: 20px;
+        }
+        .misi-box ol li {
+            margin-bottom: 10px;
+        }
+
+        /* Guru Staf Style */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+        .team-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+        }
+        .team-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+        .team-info {
+            padding: 15px;
+        }
+        .team-info h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .team-info p {
+            color: var(--slate-light);
+            font-size: 0.9rem;
+            margin: 5px 0 0 0;
+        }
+
+        /* Fasilitas & Ekskul Style */
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .facility-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: var(--white);
+            transition: transform 0.3s;
+        }
+        .facility-card:hover {
+            transform: translateY(-5px);
+        }
+        .facility-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .facility-content {
+            padding: 20px;
+        }
+        .facility-content h4 {
+            margin-bottom: 10px;
+            color: var(--navy);
+        }
+
+        /* Kurikulum Style */
+        .subject-list {
+            list-style: none;
+            padding: 0;
+        }
+        .subject-list li {
+            background: var(--white);
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .subject-list li i {
+            color: var(--gold-dark);
+        }
+
+        /* Kesiswaan Style */
+        .osis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .osis-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border-bottom: 4px solid var(--gold);
+        }
+        .osis-card i {
+            font-size: 2rem;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+        .osis-card h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        .osis-card p {
+            font-size: 0.85rem;
+            color: var(--slate-light);
+            margin: 5px 0 0 0;
+        }
+
+        /* Galeri Style */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            height: 250px;
+            box-shadow: var(--shadow);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(26, 54, 93, 0.9));
+            padding: 20px;
+            color: var(--white);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        .gallery-overlay h4 {
+            color: var(--white);
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* ====== FOOTER ====== */
+        footer {
+            background-color: #112539;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 0 20px 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            filter: grayscale(100%) invert(92%) contrast(83%);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        /* ====== FLOATING WHATSAPP ====== */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 999;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* ====== RESPONSIVE DESIGN ====== */
+        @media (max-width: 992px) {
+            .profile-grid { grid-template-columns: 1fr; }
+            .ppdb-steps { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .visi-misi-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                padding: 20px;
+                box-shadow: var(--shadow-lg);
+                gap: 15px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            .nav-links.active { display: flex; }
+            .nav-links > li { width: 100%; }
+            .dropdown-content {
+                position: static;
+                box-shadow: none;
+                width: 100%;
+                margin-top: 10px;
+                border-top: none;
+                border-left: 3px solid var(--gold);
+                border-radius: 0 8px 8px 0;
+            }
+            .dropdown-content a { padding-left: 20px; }
+            .hero h1 { font-size: 2.2rem; }
+            .news-agenda-grid { grid-template-columns: 1fr; }
+            .ppdb-steps { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            .social-links { justify-content: center; }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== HEADER ====== -->
+    <header>
+        <div class="container navbar">
+            <a class="logo" onclick="showHome()">
+                <i class="fa-solid fa-graduation-cap" style="font-size: 1.8rem; color: var(--navy);"></i>
+                <div class="logo-text">
+                    <h2>SMPN 2 Purwantoro</h2>
+                    <p>Berkarakter, Berprestasi, Mandiri</p>
+                </div>
+            </a>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="javascript:void(0)" onclick="showHome()">Beranda</a></li>
+                <li class="dropdown">
+                    <a href="#profil">Profil <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="javascript:void(0)" onclick="showPage('sejarah')">Sejarah</a>
+                        <a href="javascript:void(0)" onclick="showPage('visi-misi')">Visi & Misi</a>
+                        <a href="javascript:void(0)" onclick="showPage('guru-staf')">Guru & Staf</a>
+                        <a href="javascript:void(0)" onclick="showPage('fasilitas')">Fasilitas</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" onclick="showPage('akademik')">Akademik <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="javascript:void(0)" onclick="showPage('kurikulum')">Kurikulum</a>
+                        <a href="javascript:void(0)" onclick="showPage('ekstrakurikuler')">Ekstrakurikuler</a>
+                    </div>
+                </li>
+                <li><a href="javascript:void(0)" onclick="showPage('kesiswaan')">Kesiswaan</a></li>
+                <li><a href="javascript:void(0)" onclick="showPage('galeri')">Galeri</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+                <li><a href="#ppdb" class="btn btn-gold" style="padding: 8px 20px;">Daftar PPDB</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ======================================= -->
+    <!-- ====== MAIN CONTENT (HOMEPAGE) ======== -->
+    <!-- ======================================= -->
+    <div id="main-content">
+        <!-- HERO SECTION -->
+        <section class="hero" id="beranda">
+            <div class="container">
+                <h1>Selamat Datang di<br>SMP Negeri 2 Purwantoro</h1>
+                <p>Mencetak Generasi Cerdas, Berkarakter, dan Berakhlak Mulia di Era Digital. Komitmen kami adalah memberikan pendidikan terbaik untuk masa depan gemilang anak bangsa.</p>
+                <div class="hero-btns">
+                    <a href="#ppdb" class="btn btn-gold">Pendaftaran PPDB</a>
+                    <a href="javascript:void(0)" onclick="showPage('sejarah')" class="btn btn-outline">Kenali Sekolah Kami</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE SECTION -->
+        <section class="profile" id="profil">
+            <div class="container profile-grid">
+                <div class="profile-img">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=2070&auto=format&fit=crop" alt="Suasana Belajar Siswa">
+                </div>
+                <div class="profile-text">
+                    <h2>Tentang <span>SMPN 2 Purwantoro</span></h2>
+                    <p>SMP Negeri 2 Purwantoro berkomitmen menyediakan pendidikan berkualitas yang menyeimbangkan akademik dan karakter. Dengan lingkungan yang kondusif dan tenaga pendidik profesional, kami siap mengantar anak-anak menuju masa depan gemilang.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <i class="fa-solid fa-chalkboard-user"></i>
+                            <h4>Pendidik Berpengalaman</h4>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-book-open"></i>
+                            <h4>Kurikulum Terkini</h4>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-futbol"></i>
+                            <h4>Ekskul Beragam</h4>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <h4>Lingkungan Aman</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEWS & AGENDA SECTION -->
+        <section class="news-agenda">
+            <div class="container">
+                <div class="news-agenda-grid">
+                    <div>
+                        <h2 class="section-title" style="text-align: left;">Kabar Terbaru</h2>
+                        <div class="news-cards">
+                            <div class="news-card">
+                                <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=800&auto=format&fit=crop" alt="MPLS">
+                                <div class="news-content">
+                                    <span class="news-date"><i class="fa-regular fa-calendar"></i> 15 Juli 2024</span>
+                                    <h3>MPLS Tahun Ajaran 2024/2025</h3>
+                                    <p>Membangun solidaritas dan keluarga besar siswa baru.</p>
+                                    <a href="#">Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="news-card">
+                                <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop" alt="Upacara">
+                                <div class="news-content">
+                                    <span class="news-date"><i class="fa-regular fa-calendar"></i> 17 Agustus 2024</span>
+                                    <h3>HUT RI ke-79</h3>
+                                    <p>Semangat nasionalisme siswa SMPN 2 Purwantoro.</p>
+                                    <a href="#">Baca Selengkapnya <i class="fa-solid fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="section-title" style="text-align: left;">Agenda Mendatang</h2>
+                        <div class="agenda-box">
+                            <div class="agenda-item">
+                                <div class="agenda-date"><span class="day">20</span><span class="month">Jul</span></div>
+                                <div class="agenda-info"><h4>Pemilihan Pengurus OSIS</h4><p>08:00 - 12:00 WIB | Aula Sekolah</p></div>
+                            </div>
+                            <div class="agenda-item">
+                                <div class="agenda-date"><span class="day">05</span><span class="month">Agu</span></div>
+                                <div class="agenda-info"><h4>Lomba Kompetensi Siswa (LKS)</h4><p>07:30 WIB | Kecamatan Purwantoro</p></div>
+                            </div>
+                            <div class="agenda-item">
+                                <div class="agenda-date"><span class="day">17</span><span class="month">Agu</span></div>
+                                <div class="agenda-info"><h4>Upacara HUT Kemerdekaan</h4><p>07:00 WIB | Lapangan Upacara</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRESTASI SECTION -->
+        <section class="prestasi">
+            <div class="container">
+                <h2 class="section-title">Bangga <span style="color: var(--gold);">Berprestasi</span></h2>
+                <div class="prestasi-grid">
+                    <div class="prestasi-card">
+                        <i class="fa-solid fa-medal"></i>
+                        <h3>Juara 1 LCC Tingkat Kabupaten</h3>
+                        <p>Lomba Cerdas Cermat Tingkat Kabupaten Wonogiri (2023)</p>
+                    </div>
+                    <div class="prestasi-card">
+                        <i class="fa-solid fa-trophy"></i>
+                        <h3>Juara 2 Futsal Pelajar</h3>
+                        <p>Turnamen Futsal Antar SMP Se-Karesidenan (2024)</p>
+                    </div>
+                    <div class="prestasi-card">
+                        <i class="fa-solid fa-music"></i>
+                        <h3>Juara 1 Festival Seni Tari</h3>
+                        <p>Festival Seni Tari Tradisional Tingkat Provinsi (2023)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PPDB SECTION -->
+        <section class="ppdb" id="ppdb">
+            <div class="container">
+                <h2>Informasi PPDB 2024/2025</h2>
+                <p>Pendaftaran dibuka mulai 10 Juni 2024 hingga 30 Juni 2024. Ayo bergabung menjadi bagian dari keluarga besar SMPN 2 Purwantoro!</p>
+                
+                <div class="ppdb-steps">
+                    <div class="step"><div class="step-number">1</div><h4>Buat Akun</h4><p>Daftar menggunakan email dan nomor HP orang tua/wali di portal PPDB.</p></div>
+                    <div class="step"><div class="step-number">2</div><h4>Isi Data</h4><p>Lengkapi data diri calon siswa dan unggah dokumen persyaratan.</p></div>
+                    <div class="step"><div class="step-number">3</div><h4>Verifikasi</h4><p>Tim panitia akan memverifikasi berkas Anda secara online.</p></div>
+                    <div class="step"><div class="step-number">4</div><h4>Pengumuman</h4><p>Cek hasil seleksi pada tanggal 5 Juli 2024 dan lakukan daftar ulang.</p></div>
+                </div>
+                <a href="#" class="btn btn-gold" style="font-size: 1.1rem; padding: 15px 40px;"><i class="fa-solid fa-rocket"></i> Daftar Online Sekarang</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- ======================================= -->
+    <!-- ====== SUB PAGES (PROFIL SEKOLAH) ===== -->
+    <!-- ======================================= -->
+
+    <!-- 1. HALAMAN SEJARAH -->
+    <section class="subpage" id="page-sejarah">
+        <div class="container">
+            <a href="javascript:void(0)" onclick="showHome()" class="btn btn-navy"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+            <h1 class="page-title">Sejarah SMPN 2 Purwantoro</h1>
+            
+            <div class="content-block">
+                <p>SMP Negeri 2 Purwantoro didirikan pada tanggal 1 Agustus 1985 berdasarkan Surat Keputusan Menteri Pendidikan dan Kebudayaan Republik Indonesia. Pada awal berdirinya, sekolah ini hanya memiliki 3 ruang kelas yang dipinjam dari gedung SD Negeri Purwantoro 1, dengan 2 orang guru dan 45 siswa angkatan pertama.</p>
+                <p>Pada tahun 1990, dibangunlah gedung permanen di lahan seluas 5.000 meter persegi yang berlokasi di Jalan Raya Purwantoro No. 123. Pemekaran wilayah dan peningkatan jumlah penduduk membuat animo masyarakat untuk menyekolahkan putra-putrinya di sekolah ini terus meningkat.</p>
+                <p>Memasuki era 2000-an, SMPN 2 Purwantoro terus berinovasi dengan menambahkan fasilitas laboratorium komputer dan perpustakaan digital. Hingga saat ini, sekolah kami telah meluluskan ribuan siswa yang tersebar di berbagai sekolah menengah atas dan perguruan tinggi negeri maupun swasta ternama di seluruh Indonesia.</p>
+                <p>Pada tahun 2020, sekolah ini meraih akreditasi "A" Unggul dari Badan Akreditasi Nasional Sekolah/Madrasah (BAN-S/M), yang menjadi bukti komitmen kami terhadap kualitas pendidikan.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. HALAMAN VISI & MISI -->
+    <section class="subpage" id="page-visi-misi">
+        <div class="container">
+            <a href="javascript:void(0)" onclick="showHome()" class="btn btn-navy"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+            <h1 class="page-title">Visi & Misi Sekolah</h1>
+            
+            <div class="visi-misi-grid">
+                <div class="visi-box">
+                    <h3>Visi Kami</h3>
+                    <p>"Terwujudnya peserta didik yang beriman, bertakwa, berakhlak mulia, cerdas, terampil, mandiri, dan berwawasan teknologi serta berbudi pekerti luhur."</p>
+                </div>
+                <div class="misi-box">
+                    <h3>Misi Kami</h3>
+                    <ol>
+                        <li>Menyelenggarakan pendidikan agama dan akhlak mulia secara terpadu dalam kehidupan sehari-hari.</li>
+                        <li>Menyelenggarakan kegiatan pembelajaran yang aktif, kreatif, efektif, dan menyenangkan berbasis teknologi.</li>
+                        <li>Mengembangkan bakat, minat, dan kreativitas peserta didik melalui kegiatan ekstrakurikuler.</li>
+                        <li>Membentuk karakter peserta didik yang mandiri, disiplin, dan bertanggung jawab.</li>
+                        <li>Menumbuhkan jiwa nasionalisme, cinta tanah air, dan rasa persatuan dalam keberagaman.</li>
+                        <li>Menciptakan lingkungan sekolah yang bersih, sehat, asri, dan nyaman.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. HALAMAN GURU & STAF -->
+    <section class="subpage" id="page-guru-staf">
+        <div class="container">
+            <a href="javascript:void(0)" onclick="showHome()" class="btn btn-navy"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+            <h1 class="page-title">Tenaga Pendidik & Staf</h1>
+            <p style="margin-bottom: 30px; color: var(--slate-light);">Tim guru dan staf SMPN 2 Purwantoro terdiri dari profesional yang berpengalaman dan bersertifikat pendidik.</p>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=600&auto=format&fit=crop" alt="Kepala Sekolah">
+                    <div class="team-info">
+                        <h4>Drs. Budi Santoso, M.Pd.</h4>
+                        <p>Kepala Sekolah</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600&auto=format&fit=crop" alt="Guru BK">
+                    <div class="team-info">
+                        <h4>Siti Aminah, S.Pd.</h4>
+                        <p>Guru Bimbingan Konseling</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?q=80&w=600&auto=format&fit=crop" alt="Guru Matematika">
+                    <div class="team-info">
+                        <h4>Agus Wijaya, S.Si.</h4>
+                        <p>Guru Matematika</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=600&auto=format&fit=crop" alt="Guru B. Inggris">
+                    <div class="team-info">
+                        <h4>Rina Pratiwi, S.Pd.</h4>
+                        <p>Guru Bahasa Inggris</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80=w=600&auto=format&fit=crop" alt="Guru Olahraga">
+                    <div class="team-info">
+                        <h4>Joko Susilo, S.Pd.</h4>
+                        <p>Guru Penjasorkes</p>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop" alt="Staf TU">
+                    <div class="team-info">
+                        <h4>Hendra Gunawan</h4>
+                        <p>Staf Tata Usaha</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. HALAMAN FASILITAS -->
+    <section class="subpage" id="page-fasilitas">
+        <div class="container">
+            <a href="javascript:void(0)" onclick="showHome()" class="btn btn-navy"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+            <h1 class="page-title">Fasilitas Sekolah</h1>
+            <p style="margin-bottom: 30px; color: var(--slate-light);">Fasilitas lengkap dan modern untuk menunjang proses belajar mengajar yang berkualitas.</p>
+            
+            <div class="facilities-grid">
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=800&auto=format&fit=crop" alt="Perpustakaan">
+                    <div class="facility-content">
+                        <h4>Perpustakaan Digital</h4>
+                        <p>Ribuan koleksi buku fisik dan akses e-book untuk menunjang literasi siswa.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?q=80&w=800&auto=format&fit=crop" alt="Lab Komputer">
+                    <div class="facility-content">
+                        <h4>Laboratorium Komputer</h4>
+                        <p>Dilengkapi 40 unit PC dengan jaringan internet cepat untuk pembelajaran TIK.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=800&auto=format&fit=crop" alt="Lab IPA">
+                    <div class="facility-content">
+                        <h4>Laboratorium IPA</h4>
+                        <p>Alat peraga lengkap untuk praktikum Fisika, Kimia, dan Biologi.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800&auto=format&fit=crop" alt="Lapangan">
+                    <div class="facility-content">
+                        <h4>Lapangan Serbaguna</h4>
+                        <p>Lapangan berstandar nasional untuk olahraga basket, voli, dan upacara.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?q=80&w=800&auto=format&fit=crop" alt="Musholla">
+                    <div class="facility-content">
+                        <h4>Musholla Al-Hikmah</h4>
+                        <p>Tempat ibadah yang nyaman dan bersih untuk siswa dan guru.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?q=80&w=800&auto=format&fit=crop" alt="Aula">
+                    <div class="facility-content">
+                        <h4>Aula Serbaguna</h4>
+                        <p>Ruang pertemuan dengan kapasitas 300 orang untuk acara sekolah.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- ====== SUB PAGES (AKADEMIK) =========== -->
+    <!-- ======================================= -->
+
+    <!-- 5. HALAMAN AKADEMIK (INDUK) -->
+    <section class="subpage" id="page-akademik">
+        <div class="container">
+            <a href="javascript:void(0)" onclick="showHome()" class="btn btn-navy"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+            <h1 class="page-title">Akademik</h1>
+            
+            <div class="content-block">
+                <h3 style="margin-bottom: 15px;">Sistem Pembelajaran</h3>
+                <p>Sistem akademik di SMPN 2 Purwantoro dirancang untuk mengembangkan potensi siswa secara holistik, mencakup aspek kognitif, afektif, dan psikomotorik. Kami menerapkan pembelajaran berbasis kompetensi yang menekankan pada pemahaman konsep, keterampilan berpikir kritis, dan penerapan ilmu dalam kehidupan nyata.</p>
+            </div>
+
+            <div class="content-block">
+                <h3 style="margin-bottom: 15px;">Kalender Pendidikan 2024/2025</h3>
+                <p>Berikut adalah agenda akademik utama untuk Tahun Ajaran 2024/2025:</p>
+                <ul class="subject-list">
+                    <li><i class="fa-solid fa-calendar-day"></i> 15 Juli 2024 - Hari Pertama Masuk Sekolah & MPLS</li>
+                    <li><i class="fa-solid fa-calendar-check"></i> 23-27 September 2024 - Penilaian Tengah Semester (PTS) Ganjil</li>
+                    <li><i class="fa-solid fa-calendar-xmark"></i> 23 Desember 2024 - 5 Januari 2025 - Libur Semester Ganjil</li>
+                    <li><i class="fa-solid fa-calendar-day"></i> 6 Januari 2025 - Awal Semester Genap</li>
+                    <li><i class="fa-solid fa-calendar-check"></i> 17-21 Maret 2025 - Penilaian Tengah Semester (PTS) Genap</li>
+                    <li><i class="fa-solid fa-calendar-day"></i> 10-14 Juni 2025 - Penilaian Akhir Semester (PAS) & Ujian Sekolah</li>
+                </ul>
+            </div>
+
+            <h2 style="font-size: 1.8rem; margin-bottom: 20px; margin-top: 30px;">Detail Akademik</h2>
+            <div class="features-grid" style="margin-top: 0;">
+                <div class="content-block" style="margin: 0; cursor: pointer;" onclick="showPage('kurikulum')">
+                    <h4 style="color: var(--navy);"><i class="fa-solid fa-book-open-reader"></i> Kurikulum</h4>
+                    <p style="margin-bottom: 0;">Pelajari lebih lanjut tentang implementasi Kurikulum Merdeka dan struktur mata pelajaran kami.</p>
+                </div>
+                <div class="content-block" style="margin: 0; cursor: pointer;" onclick="showPage('ekstrakurikuler')">
+                    <h4 style="color: var(--navy);"><i class="fa-solid fa-futbol"></i> Ekstrakurikuler</h4>
+                    <p style="margin-bottom: 0;">Temukan beragam kegiatan ekstrakurikuler untuk mengembangkan minat dan bakat siswa.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. HALAMAN KURIKULUM -->
+    <section class="subpage" id="page-kurikulum">
+        <div class="container">
+            <a href="javascript:void(0)" onclick="showHome()" class="btn btn-navy"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+            <h1 class="page-title">Kurikulum Sekolah</h1>
+            
+            <div class="content-block">
+                <h3 style="margin-bottom: 15px; color: var(--navy);">Implementasi Kurikulum Merdeka</h3>
+                <p>SMP Negeri 2 Purwantoro saat ini menerapkan <strong>Kurikulum Merdeka</strong> secara penuh mulai Tahun Ajaran 2022/2023. Kurikulum ini berfokus pada pengembangan kompetensi dan karakter Profil Pelajar Pancasila, yang menekankan pada pembelajaran yang berpusat pada siswa (student-centered) dan pengembangan kompetensi abad 21 (kritis, kreatif, kolaboratif, dan komunikatif).</p>
+                <p>Proses pembelajaran dirancang agar lebih bermakna, kontekstual, dan memberikan ruang bagi siswa untuk mengeksplorasi minat dan bakatnya melalui kegiatan Projek Penguatan Profil Pelajar Pancasila (P5).</p>
+            </div>
+
+            <h2 style="font-size: 1.8rem; margin-bottom: 20px; margin-top: 30px;">Struktur Mata Pelajaran</h2>
+            <div class="facilities-grid">
+                <div class="content-block" style="margin:0;">
+                    <h4 style="margin-bottom: 15px; color: var(--navy);">A. Mata Pelajaran Umum</h4>
+                    <ul class="subject-list">
+                        <li><i class="fa-solid fa-book"></i> Pendidikan Agama dan Budi Pekerti</li>
+                        <li><i class="fa-solid fa-flag"></i> Pendidikan Pancasila dan Kewarganegaraan</li>
+                        <li><i class="fa-solid fa-language"></i> Bahasa Indonesia</li>
+                        <li><i class="fa-solid fa-calculator"></i> Matematika</li>
+                        <li><i class="fa-solid fa-flask"></i> Ilmu Pengetahuan Alam (IPA)</li>
+                        <li><i class="fa-solid fa-globe"></i> Ilmu Pengetahuan Sosial (IPS)</li>
+                        <li><i class="fa-solid fa-spell-check"></i> Bahasa Inggris</li>
+                        <li><i class="fa-solid fa-volleyball"></i> PJOK</li>
+                    </ul>
+                </div>
+                <div class="content-block" style="margin:0;">
+                    <h4 style="margin-bottom: 15px; color: var(--navy);">B. Muatan Lokal</h4>
+                    <ul class="subject-list">
+                        <li><i class="fa-solid fa-book-open"></i> Bahasa Jawa</li>
+                        <li><i class="fa-solid fa-masks-theater"></i> Budaya Nusantara</li>
+                        <li><i class="fa-solid fa-laptop-code"></i> Informatika</li>
+                    </ul>
+                </div>
+                <div class="content-block" style="margin:0;">
+                    <h4 style="margin-bottom: 15px; color: var(--navy);">C. Projek P5 (Pengembangan Diri)</h4>
+                    <ul class="subject-list">
+                        <li><i class="fa-solid fa-seedling"></i> Gaya Hidup Berkelanjutan</li>
+                        <li><i class="fa-solid fa-people-group"></i> Berekayasa dan Bergotong Royong</li>
+                        <li><i class="fa-solid fa-landmark"></i> Kearifan Lokal & Bhinneka Tunggal Ika</li>
+                        <li><i class="fa-solid fa-comments"></i> Bangunlah Jiwa dan Raganya</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. HALAMAN EKSTRAKURIKULER -->
+    <section class="subpage" id="page-ekstrakurikuler">
+        <div class="container">
+            <a href="javascript:void(0)" onclick="showHome()" class="btn btn-navy"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+            <h1 class="page-title">Kegiatan Ekstrakurikuler</h1>
+            <p style="margin-bottom: 30px; color: var(--slate-light);">Kami menyediakan beragam kegiatan ekstrakurikuler untuk mengembangkan minat, bakat, dan karakter siswa di luar jam pelajaran akademik. Setiap siswa wajib mengikuti minimal satu ekstrakurikuler.</p>
+            
+            <div class="facilities-grid">
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=800&auto=format&fit=crop" alt="Pramuka">
+                    <div class="facility-content">
+                        <h4>Pramuka (Wajib)</h4>
+                        <p>Membangun kemandirian, kepemimpinan, dan cinta alam melalui kegiatan kepramukaan setiap hari Jumat sore.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=800&auto=format&fit=crop" alt="Futsal">
+                    <div class="facility-content">
+                        <h4>Futsal & Sepak Bola</h4>
+                        <p>Melatih kerja sama tim, kebugaran, dan keterampilan bermain bola. Latihan rutin di lapangan sekolah.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1504609813442-a8924e83f76e?q=80&w=800&auto=format&fit=crop" alt="Seni Tari">
+                    <div class="facility-content">
+                        <h4>Seni Tari & Tradisional</h4>
+                        <p>Melestarikan budaya lokal melalui tarian tradisional dan modern. Sering tampil di acara sekolah dan pemerintahan.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop" alt="English Club">
+                    <div class="facility-content">
+                        <h4>English Club</h4>
+                        <p>Meningkatkan kemampuan berbahasa Inggris melalui fun learning, debat, dan drama berbahasa Inggris.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80=w=800&auto=format&fit=crop" alt="Robotik">
+                    <div class="facility-content">
+                        <h4>Klub Robotik & Koding</h4>
+                        <p>Mengenalkan teknologi AI, pemrograman dasar, dan perakitan robot sederhana untuk menghadapi era digital.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1532635241-17e820acc59f?q=80&w=800&auto=format&fit=crop" alt="Paskibra">
+                    <div class="facility-content">
+                        <h4>Paskibra</h4>
+                        <p>Melatih kedisiplinan, tanggung jawab, dan keterampilan baris-berbaris serta pengibaran bendera.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1453738773917-9c3eff1db985?q=80=w=800&auto=format&fit=crop" alt="Jurnalistik">
+                    <div class="facility-content">
+                        <h4>Jurnalistik & Fotografi</h4>
+                        <p>Mengasah kemampuan menulis berita, wawancara, dan teknik dasar fotografi untuk majalah sekolah.</p>
+                    </div>
+                </div>
+                <div class="facility-card">
+                    <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80=w=800&auto=format&fit=crop" alt="Voli">
+                    <div class="facility-content">
+                        <h4>Voli & Basket</h4>
+                        <p>Ekstrakurikuler olahraga untuk mengembangkan bakat siswa di bidang bola voli dan basket.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- ====== SUB PAGES (KESISWAAN) ========== -->
+    <!-- ======================================= -->
+
+    <!-- 8. HALAMAN KESISWAAN -->
+    <section class="subpage" id="page-kesiswaan">
+        <div class="container">
+            <a href="javascript:void(0)" onclick="showHome()" class="btn btn-navy"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+            <h1 class="page-title">Kesiswaan</h1>
+            
+            <div class="content-block">
+                <h3 style="margin-bottom: 15px;">Pengembangan Karakter Siswa</h3>
+                <p>Bidang Kesiswaan SMPN 2 Purwantoro berperan penting dalam membentuk karakter, disiplin, dan kepemimpinan siswa. Kami percaya bahwa pendidikan tidak hanya soal akademik, tetapi juga tentang membangun pribadi yang bermoral dan berkontribusi positif bagi masyarakat.</p>
+            </div>
+
+            <h2 style="font-size: 1.8rem; margin-bottom: 20px; margin-top: 30px;">Struktur Pengurus OSIS 2024/2025</h2>
+            <div class="osis-grid">
+                <div class="osis-card">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <h4>Arya Pratama</h4>
+                    <p>Ketua OSIS</p>
+                </div>
+                <div class="osis-card">
+                    <i class="fa-solid fa-user-tie"></i>
+                    <h4>Dewi Lestari</h4>
+                    <p>Wakil Ketua OSIS</p>
+                </div>
+                <div class="osis-card">
+                    <i class="fa-solid fa-user-pen"></i>
+                    <h4>Rizki Ramadhan</h4>
+                    <p>Sekretaris</p>
+                </div>
+                <div class="osis-card">
+                    <i class="fa-solid fa-user-pen"></i>
+                    <h4>Nabila Az-Zahra</h4>
+                    <p>Bendahara</p>
+                </div>
+                <div class="osis-card">
+                    <i class="fa-solid fa-people-group"></i>
+                    <h4>Bagas Aditya</h4>
+                    <p>Koordinator Bidang</p>
+                </div>
+                <div class="osis-card">
+                    <i class="fa-solid fa-people-group"></i>
+                    <h4>Salsa Putri</h4>
+                    <p>Koordinator Bidang</p>
+                </div>
+            </div>
+
+            <div class="content-block" style="margin-top: 40px;">
+                <h3 style="margin-bottom: 15px;">Program Bimbingan Konseling (BK)</h3>
+                <p>Layanan Bimbingan Konseling dirancang untuk membantu siswa mengatasi hambatan akademik, pribadi, dan sosial. Program meliputi:</p>
+                <ul class="subject-list" style="margin-top: 15px;">
+                    <li><i class="fa-solid fa-circle-info"></i> Layanan Orientasi dan Informasi</li>
+                    <li><i class="fa-solid fa-hand-holding-heart"></i> Layanan Bimbingan Pribadi & Sosial</li>
+                    <li><i class="fa-solid fa-graduation-cap"></i> Layanan Bimbingan Belajar & Karir</li>
+                    <li><i class="fa-solid fa-phone"></i> Konsultasi Individu (Wajib dengan perjanjian)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- ====== SUB PAGES (GALERI) ============= -->
+    <!-- ======================================= -->
+
+    <!-- 9. HALAMAN GALERI -->
+    <section class="subpage" id="page-galeri">
+        <div class="container">
+            <a href="javascript:void(0)" onclick="showHome()" class="btn btn-navy"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+            <h1 class="page-title">Galeri Kegiatan</h1>
+            <p style="margin-bottom: 30px; color: var(--slate-light);">Dokumentasi momen berharga dan kegiatan seru siswa-siswi SMPN 2 Purwantoro.</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop" alt="Kegiatan Belajar">
+                    <div class="gallery-overlay">
+                        <h4>Pembelajaran di Kelas</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=800&auto=format&fit=crop" alt="Upacara">
+                    <div class="gallery-overlay">
+                        <h4>Upacara Bendera</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?q=80&w=800&auto=format&fit=crop" alt="Aula">
+                    <div class="gallery-overlay">
+                        <h4>Acara di Aula</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?q=80&w=800&auto=format&fit=crop" alt="Pramuka">
+                    <div class="gallery-overlay">
+                        <h4>Kegiatan Pramuka</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=800&auto=format&fit=crop" alt="Seni Tari">
+                    <div class="gallery-overlay">
+                        <h4>Festival Seni Tari</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop" alt="Olahraga">
+                    <div class="gallery-overlay">
+                        <h4>Latihan Futsal</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc?q=80=w=800&auto=format&fit=crop" alt="Lab">
+                    <div class="gallery-overlay">
+                        <h4>Praktikum Laboratorium</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80=w=800&auto=format&fit=crop" alt="Kelulusan">
+                    <div class="gallery-overlay">
+                        <h4>Wisuda & Perpisahan</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======================================= -->
+    <!-- ================ FOOTER ================ -->
+    <!-- ======================================= -->
+    <footer id="kontak">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>SMPN 2 Purwantoro</h3>
+                    <p><i class="fa-solid fa-location-dot"></i> Jl. Raya Purwantoro No. 123, Kec. Purwantoro, Kabupaten Wonogiri, Jawa Tengah, 57694.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Kontak Resmi</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-phone"></i> (0273) 123-456</li>
+                        <li><i class="fa-brands fa-whatsapp"></i> 0812-3456-7890</li>
+                        <li><i class="fa-solid fa-envelope"></i> info@smpn2purwantoro.sch.id</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Tautan Cepat</h3>
+                    <ul>
+                        <li><a href="javascript:void(0)" onclick="showHome()">Beranda</a></li>
+                        <li><a href="#ppdb">PPDB Online</a></li>
+                        <li><a href="#">E-Learning Portal</a></li>
+                        <li><a href="javascript:void(0)" onclick="showPage('galeri')">Galeri Foto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Lokasi Sekolah</h3>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.5023176842347!2d111.0667!3d-7.5667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMzQnMDAuMSJTIDExMcKwMDQnMDAuMSJF!5e0!3m2!1sen!2sid!4v1620000000000!5m2!1sen!2sid" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 SMP Negeri 2 Purwantoro. All Rights Reserved. | Dibuat dengan ❤️ oleh Tim TIK Sekolah.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6281234567890" class="wa-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- ====== JAVASCRIPT ====== -->
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // SPA Page Navigation Logic
+        const mainContent = document.getElementById('main-content');
+        const subpages = document.querySelectorAll('.subpage');
+
+        function showPage(pageId) {
+            // Sembunyikan konten utama
+            mainContent.style.display = 'none';
+            
+            // Sembunyikan semua sub-halaman
+            subpages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Tampilkan sub-halaman yang dipilih
+            const targetPage = document.getElementById('page-' + pageId);
+            if(targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            // Scroll ke atas
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showHome() {
+            // Sembunyikan semua sub-halaman
+            subpages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Tampilkan konten utama
+            mainContent.style.display = 'block';
+            
+            // Scroll ke atas
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
